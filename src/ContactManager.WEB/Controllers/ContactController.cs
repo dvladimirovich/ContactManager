@@ -54,8 +54,7 @@ namespace ContactManager.WEB.Controllers
                 LastName = p.LastName,
                 Birth = p.Birth.ToString("d MMM yyyy"),
                 Email = p.Email,
-                Phone = p.Phone,
-                AddressId = p.AddressId
+                Phone = p.Phone
             }).ToList());
 
             return model.ToJsonResult();

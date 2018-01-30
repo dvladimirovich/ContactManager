@@ -21,10 +21,6 @@
             "label": "Phone",
             "property": "Phone",
             "sortable": true
-        },
-        {
-            "label": "AddressId",
-            "property": "AddressId"
         }
     ];
 
