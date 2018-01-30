@@ -27,5 +27,11 @@
     "inputFiles": [
       "wwwroot/js/contacts.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/locations.min.js",
+    "inputFiles": [
+      "wwwroot/js/locations.js"
+    ]
   }
 ]
