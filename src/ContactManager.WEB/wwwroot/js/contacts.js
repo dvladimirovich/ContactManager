@@ -3,14 +3,9 @@
     // define the columns for the table
     var columns = [
         {
-            "label": "Id",          // column header label
-            "property": "Id",       // the JSON property you are binding to
-            "sortable": false       // is the column sortable (if true returns name from property)
-        },
-        {
-            "label": "Full Name",
-            "property": "FullName",
-            "sortable": true
+            "label": "Full Name",       // column header label
+            "property": "FirstName",    // the JSON property you are binding to
+            "sortable": true            // is the column sortable (if true returns name from property)
         },
         {
             "label": "Birth date",
@@ -29,8 +24,7 @@
         },
         {
             "label": "AddressId",
-            "property": "AddressId",
-            "sortable": false
+            "property": "AddressId"
         }
     ];
 
@@ -83,6 +77,43 @@
     });
 }
 
+// override the column output via a custom renderer
+// allows us to output custom markup for each column
+function contactsColumnRenderer(helpers, callback) {
+    // determine what column is being rendered
+    var column = helpers.columnAttr;
+
+    // get all the data for the entire row
+    var rowData = helpers.rowData;
+    var customMarkup = '';
+
+    // only override the output for specific columns
+    // will default to output the text 
+    switch (column) {
+        case 'FirstName':
+            // combine FirstName and LastName into a single column
+            customMarkup = rowData.FirstName + ' ' + rowData.LastName;
+            break;
+        default:
+            // otherwise, just use the existing text value
+            customMarkup = helpers.item.text();
+            break;
+    }
+
+    helpers.item.html(customMarkup);
+
+    callback();
+}
+
+// override the row output via a custom renderer.
+function contactsRowRenderer(helpers, callback) {
+    // get an id and add it to the "tr" DOM element
+    var item = helpers.item;
+    item.attr('id', 'row-' + helpers.rowData.Id);
+
+    callback();
+}
+
 $(function () {
     // initialize the repeater
     var repeater = $('#contactsRepeater');
@@ -90,7 +121,9 @@ $(function () {
     // responsible for any paging, sorting, filtering, searching logic
     repeater.repeater({
         dataSource: contactsDataSource,
-        list_noItemsHTML: 'no information to render'
+        list_noItemsHTML: 'no information to see...',
+        list_columnRendered: contactsColumnRenderer,
+        list_rowRendered: contactsRowRenderer
     });
-    //repeater.repeater('resize');
+    repeater.repeater('resize');
 });

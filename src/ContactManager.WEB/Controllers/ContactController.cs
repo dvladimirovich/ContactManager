@@ -42,7 +42,7 @@ namespace ContactManager.WEB.Controllers
             
             if (!string.IsNullOrEmpty(options.SortDirection))
             {
-                query = query.OrderByField(options.SortBy == "FullName" ? "FirstName" : options.SortBy, options.SortDirection == "asc");
+                query = query.OrderByField(options.SortBy, options.SortDirection == "asc");
             }
 
             query = query.Skip(options.PageIndex * options.PageSize).Take(options.PageSize);
@@ -50,7 +50,8 @@ namespace ContactManager.WEB.Controllers
             var model = new ContactsModel(count, query.Select(p => new PersonTableModel
             {
                 Id = p.Id,
-                FullName = p.FirstName + " " + p.LastName,
+                FirstName = p.FirstName,
+                LastName = p.LastName,
                 Birth = p.Birth.ToString("d MMM yyyy"),
                 Email = p.Email,
                 Phone = p.Phone,

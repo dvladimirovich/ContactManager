@@ -3,14 +3,9 @@
     // define the columns for the table
     var columns = [
         {
-            "label": "Id",          // column header label
-            "property": "Id",       // the JSON property you are binding to
-            "sortable": false       // is the column sortable (if true returns name from property)
-        },
-        {
-            "label": "Country",
-            "property": "Country",
-            "sortable": true
+            "label": "Country",       // column header label
+            "property": "Country",    // the JSON property you are binding to
+            "sortable": true          // is the column sortable (if true returns name from property)
         },
         {
             "label": "Region",
@@ -29,8 +24,7 @@
         },
         {
             "label": "Postal",
-            "property": "Postal",
-            "sortable": false
+            "property": "Postal"
         }
     ];
 
@@ -83,6 +77,15 @@
     });
 }
 
+// override the row output via a custom renderer
+function locationsRowRenderer(helpers, callback) {
+    // get an id and add it to the "tr" DOM element
+    var item = helpers.item;
+    item.attr('id', 'row-' + helpers.rowData.Id);
+
+    callback();
+}
+
 $(function () {
     // initialize the repeater
     var repeater = $('#locationsRepeater');
@@ -90,7 +93,8 @@ $(function () {
     // responsible for any paging, sorting, filtering, searching logic
     repeater.repeater({
         dataSource: locationsDataSource,
-        list_noItemsHTML: 'no information to render'
+        list_noItemsHTML: 'no information to see...',
+        list_rowRendered: locationsRowRenderer
     });
-    //repeater.repeater('resize');
+    repeater.repeater('resize');
 });
