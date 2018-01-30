@@ -1,0 +1,108 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@*Data Table*@
+<div class="row">
+    <div class="repeater" id="contactsRepeater" data-staticheight="true" data-currentview="list" data-viewtype="list">
+
+        @*HEADER*@
+        <div class="repeater-header">
+            <div class="repeater-header-left">
+                <div class="repeater-search">
+                    <div class="search input-group">
+                        <input type="search" class="form-control" placeholder="Search">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <span class="glyphicon glyphicon-search"></span>
+                                <span class="sr-only">Search</span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            @*<div class="repeater-header-right">
+                    <div class="btn-group selectlist repeater-filters">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span class="selected-label"> </span>
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Filters</span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li data-value="all" data-selected="true" data-property="all"><a href="#">All Items</a></li>
+                            <li class="divider"></li>
+                            <li data-value="draft" data-property="status"><a href="#">Draft</a></li>
+                            <li data-value="archived" data-property="status"><a href="#">Archived</a></li>
+                            <li data-value="active" data-property="status"><a href="#">Active</a></li>
+                        </ul>
+                        <input class="hidden hidden-field" name="filterSelection" readonly="readonly" aria-hidden="true" type="text">
+                    </div>
+                </div>*@
+        </div>
+
+        @*BODY*@
+        <div class="repeater-viewport" style="height: 768px; min-height: 480px;">
+            <div class="repeater-canvas"></div>
+            <div class="loader repeater-loader"></div>
+        </div>
+
+        @*FOOTER*@
+        <div class="repeater-footer">
+            <div class="repeater-footer-left">
+                <div class="repeater-itemization">
+                    <span><span class="repeater-start"></span> - <span class="repeater-end"></span> of <span class="repeater-count"></span> items</span>
+                    <div class="btn-group selectlist dropup" data-resize="auto">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span class="selected-label"> </span>
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li data-value="25" data-selected="true"><a href="#">25</a></li>
+                            <li data-value="50"><a href="#">50</a></li>
+                            <li data-value="100"><a href="#">100</a></li>
+                        </ul>
+                        <input class="hidden hidden-field" name="itemsPerPage" readonly="readonly" aria-hidden="true" type="text">
+                    </div>
+                    <span>Per Page</span>
+                </div>
+            </div>
+            <div class="repeater-footer-right">
+                <div class="repeater-pagination">
+                    <button type="button" class="btn btn-default btn-sm repeater-prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Previous Page</span>
+                    </button>
+                    <label class="page-label" id="myPageLabel">Page</label>
+                    <div class="repeater-primaryPaging active">
+                        <div class="input-group input-append dropdown combobox dropup">
+                            <input type="text" class="form-control" aria-labelledby="myPageLabel">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-right"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control repeater-secondaryPaging" aria-labelledby="myPageLabel">
+                    <span>of <span class="repeater-pages"></span></span>
+                    <button type="button" class="btn btn-default btn-sm repeater-next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next Page</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <environment names="Development">
+        <script src="~/js/contacts.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/js/contacts.min.js" asp-append-version="true"></script>
+    </environment>
+}
